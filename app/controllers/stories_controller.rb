@@ -28,7 +28,7 @@ class StoriesController < ApplicationController
 
   def fetch_top_stories
     sleep 0.5 # Used to show skeleton on index page. Remove if not needed
-    Story.order(created_at: :desc).limit(10)
+    Story.order(created_at: :asc).limit(10)
   end
 
   def fetch_and_create_stories_from_api
