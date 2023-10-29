@@ -10,7 +10,26 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="flex min-h-full">
+    <div class="w-full">
+      <header class="bg-gray-50 border-x border-200 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-[480px] lg:items-start lg:overflow-y-auto">
+        <div class="mx-auto px-4 pb-4 pt-10 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:px-8 lg:py-12 xl:px-12 space-y-20">
+          <%= image_tag "h-news.png", class: "h-full w-64 rounded-md mx-auto shadow-lg" %>
+
+          <div class="text-center text-sm">
+            <ul class="space-y-3 text-gray-500">
+              <li><a href="https://news.ycombinator.com/newsguidelines.html" target="_top">Guidelines</a></li>
+              <li><a href="https://news.ycombinator.com/newsfaq.html" target="_top">FAQ</a></li>
+              <li><a href="https://news.ycombinator.com/lists" target="_top">Lists</a></li>
+              <li><a href="https://github.com/HackerNews/API" target="_top">API</a></li>
+            </ul>
+          </div>
+          
+        </div>  
+      </header>
+      <main class="relative mb-28 lg:ml-[480px]">
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>

@@ -1,0 +1,42 @@
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <%# Header %>
+  <div>
+    <%# Breadcrumb %>
+    <ol class="flex items-center whitespace-nowrap min-w-0" aria-label="Breadcrumb">
+      <li class="text-sm">
+        <%= link_to root_path, class: "group flex items-center text-gray-500 hover:text-orange-500" do %>
+          <svg class="flex-shrink-0 overflow-visible h-4 w-4 mr-2 text-gray-400 group-hover:text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+          </svg>
+          Stories
+        <% end %>
+      </li>
+    </ol>
+
+    <div class="py-3">
+      <h1 class="font-semibold text-2xl">
+        <%= link_to @story.title, @story.url, target: "_blank", class: "hover:text-orange-500" %>
+      </h1>
+      <div class="text-gray-400 text-sm flex items-center space-x-2 mt-2">
+        <div class="">
+          <%= @story.score %> points by <%= @story.by %> <%= time_ago_in_words(Time.at(@story.time)) %> ago
+        </div>
+        <div class="border-l border-gray-300 pl-3">
+          <%= @story.comments.count %> comments
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-10">
+    <%= turbo_frame_tag "comments", src: story_comments_path(story_id: @story.id), loading: "lazy" do %>
+      <div class="flex items-center">
+        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-orange-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Loading comments...
+      </div>
+    <% end %>
+  </div>
+</div>
