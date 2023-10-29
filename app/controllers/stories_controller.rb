@@ -10,6 +10,7 @@ class StoriesController < ApplicationController
     if Story.any?
       @top_10_stories = fetch_top_stories
     else
+      # On initial load no stories will be in the DB, so fetch from API
       fetch_and_create_stories_from_api
     end
   end
