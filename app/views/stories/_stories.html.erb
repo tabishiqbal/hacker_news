@@ -1,0 +1,34 @@
+<%= turbo_frame_tag "top-stories" do %>
+  <div class="divide-y divide-gray-100 sm:mt-4 lg:mt-8 lg:border-t lg:border-gray-100">
+    <% top_10_stories.each do |story| %>
+      <article class="py-10 sm:py-12">
+        <div class="lg:px-8">
+          <div class="lg:max-w-4xl">
+            <div class="mx-auto px-4 sm:px-6 md:max-w-2xl md:px-4 lg:px-0">
+              <div class="flex flex-col items-start">
+                <h2 class="mt-2 text-lg font-bold text-gray-900">
+                  <%= link_to story.title, story_path(story), target: "_top" %>
+                </h2>
+                <time class="order-first font-mono text-sm leading-7 text-gray-500">
+                  <%= Time.at(story.time).strftime("%b %e, %Y") %>
+                </time>
+                <div class="mt-1 w-full grid grid-cols-4 gap-6 text-sm text-gray-400">
+                  <div class="col-span-1">By: <span class="text-orange-500 font-semibold"><%= story.by %></span></div>
+                  <div class="col-span-2"><%= truncate(story.url, length: 40) %></div>
+                  <div class="col-span-1 flex items-center">
+                    <%= link_to story_path(story), target: "_top", class: "flex items-center space-x-1 hover:text-orange-500" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mt-1 flex-none">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                      </svg>
+                      <span><%= story.kids.count %></span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    <% end %>
+  </div>
+<% end %>

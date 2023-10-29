@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "top-stories" do %>
+  <%= render partial: "stories", locals: {top_10_stories: @top_10_stories}%>
+<% end %>

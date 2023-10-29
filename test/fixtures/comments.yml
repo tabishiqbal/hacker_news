@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  story: one
+  body: MyText
+  by: MyString
+  time: 1
+  hn_id: 1
+  parent: 1
+
+two:
+  story: two
+  body: MyText
+  by: MyString
+  time: 1
+  hn_id: 1
+  parent: 1
