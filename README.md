@@ -74,3 +74,4 @@ export EDITOR=nano; crontab -e
 
 * Errors are being added to log. However, if using 3rd party application like AppSignal we can send errors there.
 * Rake task currently calls the service objeects directly.  We could refactor to have one job that calls others after its complete.
+* CreateStoryCommentsJob - currently the way it is setup you could enqueue several of the jobs with the same story.id.  This is not ideal.

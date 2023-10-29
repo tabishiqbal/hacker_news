@@ -5,15 +5,20 @@ module HackerNews
   class CreateStoryCommentsJob < ApplicationJob
     queue_as :default
 
-    # This job will retry 3 times with a 5 minute wait between each retry
+    # This job will retry 3 times with a 2 minute wait between each retry
     # if the job fails due to a record not found error
     rescue_from(ActiveRecord::RecordNotFound) do |exception|
-      retry_job(wait: 5.minutes, retry_count: arguments.last) if arguments.last < 3
+      retry_job(wait: 2.minutes, retry_count: arguments.last) if arguments.last < 3
     end
 
     def perform(story_id, retry_count = 0)
       # If the story cannot be found it will raise an ActiveRecord::RecordNotFound error
       story = Story.find(story_id)
+
+      # Exit early if the story doesn't exist or if comments already exist.
+      # This is to prevent duplicate comments from being created.
+      # However, can be refactored further to ensure that new comments are created...
+      return if story.nil? || story.comments.exists?
       
       begin
         # Ensure to pass the DB id of the story to the service
